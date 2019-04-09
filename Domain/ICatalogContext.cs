@@ -10,7 +10,7 @@ namespace Domain
     {
         DbSet<Discipline> Disciplines { get;}
         DbSet<StudentMark> StudentMarks { get;}
-        DbSet<StudentClass> StudentClasses { get;}
+        DbSet<Course> Courses { get;}
         DbSet<Student> Students { get;}
         DbSet<Teacher> Teachers { get; }
 
