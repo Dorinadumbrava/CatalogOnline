@@ -4,6 +4,16 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 15.0.28307.271
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UIWinForms", "UIWinForms\UIWinForms.csproj", "{B58E7816-B3A5-4171-ACF0-3B612E854E0F}"
+	ProjectSection(ProjectDependencies) = postProject
+		{F6DEDBE5-DD8E-455A-9F87-C71272863AC9} = {F6DEDBE5-DD8E-455A-9F87-C71272863AC9}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MVP", "MVP\MVP.csproj", "{F6DEDBE5-DD8E-455A-9F87-C71272863AC9}"
+	ProjectSection(ProjectDependencies) = postProject
+		{22B238A7-313B-4810-B909-E6563D651042} = {22B238A7-313B-4810-B909-E6563D651042}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "Domain\Domain.csproj", "{22B238A7-313B-4810-B909-E6563D651042}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +25,14 @@ Global
 		{B58E7816-B3A5-4171-ACF0-3B612E854E0F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B58E7816-B3A5-4171-ACF0-3B612E854E0F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B58E7816-B3A5-4171-ACF0-3B612E854E0F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F6DEDBE5-DD8E-455A-9F87-C71272863AC9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F6DEDBE5-DD8E-455A-9F87-C71272863AC9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F6DEDBE5-DD8E-455A-9F87-C71272863AC9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F6DEDBE5-DD8E-455A-9F87-C71272863AC9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{22B238A7-313B-4810-B909-E6563D651042}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{22B238A7-313B-4810-B909-E6563D651042}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{22B238A7-313B-4810-B909-E6563D651042}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{22B238A7-313B-4810-B909-E6563D651042}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
