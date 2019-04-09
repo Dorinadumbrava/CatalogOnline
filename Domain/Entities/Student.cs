@@ -1,14 +1,15 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Domain.Entities
 {
     public class Student
     {
-        public int Id { get; set; }
+        public int StudentId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public int StudentClassId { get; set; }
-        public List<Teacher> Teachers { get; set; }
-        public List<Discipline> Disciplines { get; set; }
+        public virtual ICollection<StudentTeachers> Teachers { get; set; }
+        public virtual ICollection<StudentDisciplines> Disciplines { get; set; }
     }
 }

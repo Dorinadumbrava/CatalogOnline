@@ -4,10 +4,10 @@ namespace Domain.Entities
 {
     public class Discipline
     {
-        public int Id { get; set; }
+        public int DisciplineId { get; set; }
         public string Name { get; set; }
-        public List<Student> Students { get; set; }
-        public List<Teacher> Teachers { get; set; }
+        public virtual ICollection<StudentDisciplines> Students { get; set; }
+        public virtual ICollection<Teacher> Teachers { get; set; }
 
     }
 }
