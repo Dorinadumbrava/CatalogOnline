@@ -127,9 +127,11 @@
     <Compile Include="CatalogContext.cs" />
     <Compile Include="Class1.cs" />
     <Compile Include="Entities\Discipline.cs" />
+    <Compile Include="Entities\StudentDisciplines.cs" />
     <Compile Include="Entities\StudentMark.cs" />
     <Compile Include="Entities\Student.cs" />
     <Compile Include="Entities\StudentClass.cs" />
+    <Compile Include="Entities\StudentTeachers.cs" />
     <Compile Include="Entities\Teacher.cs" />
     <Compile Include="ICatalogContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

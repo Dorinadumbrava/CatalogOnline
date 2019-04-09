@@ -25,8 +25,17 @@ namespace Domain
         public virtual DbSet<Student> Students { get; }
         public virtual DbSet<Teacher> Teachers { get; }
 
-        protected void OnModelCreation(ModelBuilder modelBuilder)
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Student>()
+              .HasMany(d=> d.Disciplines)
+              .WithMany(s => s.)
+              .Map(ca =>
+              {
+                  ca.MapLeftKey("BookId");
+                  ca.MapRightKey("GenresId");
+                  ca.ToTable("BookGenres");
+              });
         }
 
         public void Migrate()
