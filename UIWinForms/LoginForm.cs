@@ -12,7 +12,7 @@ using System.Windows.Forms;
 
 namespace UIWinForms
 {
-    public partial class LoginForm : Form, ILoginView
+    public partial class LoginForm : MetroFramework.Forms.MetroForm, ILoginView
     {
         private readonly ApplicationContext _context;
         public LoginForm(ApplicationContext context)
@@ -40,6 +40,16 @@ namespace UIWinForms
         private void Invoke(Action action)
         {
             if (action != null) action();
+        }
+
+        private void metroLabel2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lblUsername_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
