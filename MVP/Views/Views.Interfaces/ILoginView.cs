@@ -8,8 +8,6 @@ namespace MVP.Views.Views.Interfaces
 {
     public interface ILoginView : IView
     {
-        string Username { get; }
-        string Password { get; }
         event Action Login;
         void ShowError(string errorMessage);
     }
