@@ -16,7 +16,7 @@ namespace Domain
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=CatalogDB;Trusted_Connection=True;");
+            optionsBuilder.UseSqlServer(@"Server=.\\SQLEXPRESS;Database=CatalogDB;Trusted_Connection=True;");
         }
 
         public virtual DbSet<Discipline> Disciplines { get; }
