@@ -1,4 +1,8 @@
-﻿using MVP.Presenters.Presenters.Interfaces;
+﻿using MVP.Common;
+using MVP.Presenters.Presenters.Interfaces;
+using MVP.Services;
+using MVP.Services.Services.Interfaces;
+using MVP.Views.Views.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,6 +21,13 @@ namespace UIWinForms
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+            var controller = new ApplicationController(new LightInjectAdapder())
+                .RegisterView<ILoginView, LoginForm>()
+             
+                .RegisterService<ILoginService, StupidLoginService>()
+                .RegisterInstance(new ApplicationContext());
+
+            controller.Run<LoginPresenter>();
         }
     }
 }
