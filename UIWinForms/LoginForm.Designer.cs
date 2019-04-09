@@ -1,6 +1,6 @@
 ﻿namespace UIWinForms
 {
-    partial class Form1
+    partial class LoginForm
     {
         /// <summary>
         /// Required designer variable.
@@ -35,6 +35,11 @@
         }
 
         #endregion
+        private System.Windows.Forms.TextBox txtUsername;
+        private System.Windows.Forms.TextBox txtPassword;
+        private System.Windows.Forms.Button btnLogin;
+        private System.Windows.Forms.Label lblError;
+
     }
 }
 
