@@ -2,13 +2,13 @@
 
 namespace Domain.Entities
 {
-    public class StudentClass
+    public class Course
     {
         public int Id { get; set; }
 
         public string ClassName { get; set; }
 
-        public virtual ICollection<Teacher> Teachers { get; set; }
+        public virtual ICollection<CourseTeacher> Teachers { get; set; }
 
         public virtual ICollection<Student> Students { get; set; }
     }

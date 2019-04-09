@@ -126,14 +126,25 @@
   <ItemGroup>
     <Compile Include="CatalogContext.cs" />
     <Compile Include="Class1.cs" />
+    <Compile Include="Entities\CourseTeacher.cs" />
     <Compile Include="Entities\Discipline.cs" />
-    <Compile Include="Entities\StudentDisciplines.cs" />
+    <Compile Include="Entities\StudentDiscipline.cs" />
     <Compile Include="Entities\StudentMark.cs" />
     <Compile Include="Entities\Student.cs" />
-    <Compile Include="Entities\StudentClass.cs" />
-    <Compile Include="Entities\StudentTeachers.cs" />
+    <Compile Include="Entities\Course.cs" />
+    <Compile Include="Entities\StudentTeacher.cs" />
     <Compile Include="Entities\Teacher.cs" />
+    <Compile Include="Entities\TeacherDiscipline.cs" />
     <Compile Include="ICatalogContext.cs" />
+    <Compile Include="Migrations\20190409115201_First.cs" />
+    <Compile Include="Migrations\20190409115201_First.designer.cs">
+      <DependentUpon>20190409115201_First.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\20190409115842_Renamed StudentClasses to Courses.cs" />
+    <Compile Include="Migrations\20190409115842_Renamed StudentClasses to Courses.designer.cs">
+      <DependentUpon>20190409115842_Renamed StudentClasses to Courses.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\CatalogContextModelSnapshot.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
