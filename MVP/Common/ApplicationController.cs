@@ -20,9 +20,16 @@ namespace MVP.Common
             _container.RegisterInstance<IApplicationController>(this);
         }
 
+        public IApplicationController RegisterServiceSingleton<TModel, TImplementation>()
+            where TImplementation : class, TModel
+        {
+            _container.RegisterSingleton<TModel, TImplementation>();
+            return this;
+        }
+
         public IApplicationController RegisterView<TView, TImplementation>()
-            where TImplementation : class, TView
-            where TView : IView
+                where TImplementation : class, TView
+                where TView : IView
         {
             _container.Register<TView, TImplementation>();
             return this;
