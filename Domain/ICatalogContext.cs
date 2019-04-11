@@ -8,11 +8,11 @@ namespace Domain
 {
     public interface ICatalogContext
     {
-        DbSet<Discipline> Disciplines { get;}
-        DbSet<StudentMark> StudentMarks { get;}
-        DbSet<Course> Courses { get;}
-        DbSet<Student> Students { get;}
-        DbSet<Teacher> Teachers { get; }
+        DbSet<Discipline> Disciplines { get; set; }
+        DbSet<StudentMark> StudentMarks { get; set; }
+        DbSet<Course> Courses { get; set; }
+        DbSet<Student> Students { get; set; } 
+        DbSet<Teacher> Teachers { get; set; }
 
 
         int SaveChanges();

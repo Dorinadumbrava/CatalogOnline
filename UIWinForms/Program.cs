@@ -1,4 +1,7 @@
-﻿using LightInject;
+﻿using Domain;
+using Domain.Repositories;
+using Domain.Repositories.Interfaces;
+using LightInject;
 using MVP.Common;
 using MVP.Events;
 using MVP.Events.EventInterfaces;
@@ -27,8 +30,9 @@ namespace UIWinForms
             Application.SetCompatibleTextRenderingDefault(false);
             var controller = new ApplicationController(new LightInjectAdapder())
                 .RegisterView<ILoginView, LoginForm>()
-             
-                .RegisterService<ILoginService, StupidLoginService>()
+                .RegisterService<ICatalogContext, CatalogContext>()
+                .RegisterService<ITeacherRepository, TeacherRepository>()
+                .RegisterService<ILoginService, LoginService>()
                 .RegisterView<IMainView, MainForm>()
                 .RegisterControlView<ITeacherDetailsView, TeacherDetails>()
                 .RegisterControlView<IClassSelectorView, ClassSelector>()

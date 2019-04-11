@@ -28,7 +28,7 @@ namespace MVP.Presenters.Presenters.Interfaces
             _service = service;
             this.controller = controller;
             //_eventAgregator = eventAgregator;
-            _view.Login += () => Login(_view.Username, _view.Password);
+            _view.Login +=  () => Login(_view.Username, _view.Password);
         }
 
         public void Run()
@@ -36,14 +36,14 @@ namespace MVP.Presenters.Presenters.Interfaces
             _view.Show();
         }
 
-        private void Login(string username, string password)
+        private async void Login(string username, string password)
         {
             if (username == null)
                 throw new ArgumentException("username", nameof(username));
             if (password == null)
                 throw new ArgumentException("password", nameof(password));
 
-            if (_service.Login(username, password))
+            if (await _service.Login(username, password))
             {
                 EventAgregator.Instance.Publish(new LoginSuccessMessage("username"));
                 controller.Run<MainPresenter>();
