@@ -19,11 +19,11 @@ namespace Domain
             optionsBuilder.UseSqlServer(@"Server=.\SQLEXPRESS;Database=CatalogDB;Trusted_Connection=True;");
         }
 
-        public virtual DbSet<Discipline> Disciplines { get; }
-        public virtual DbSet<StudentMark> StudentMarks { get; }
-        public virtual DbSet<Course> Courses { get; }
-        public virtual DbSet<Student> Students { get; }
-        public virtual DbSet<Teacher> Teachers { get; }
+        public virtual DbSet<Discipline> Disciplines { get; set; }
+        public virtual DbSet<StudentMark> StudentMarks { get; set; }
+        public virtual DbSet<Course> Courses { get; set; }
+        public virtual DbSet<Student> Students { get; set; }
+        public virtual DbSet<Teacher> Teachers { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
