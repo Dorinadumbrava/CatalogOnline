@@ -17,7 +17,13 @@ namespace Domain.Repositories
             _teachers = context.Teachers;
         }
 
-        public async Task<TeacherLogin> Get(string username, string password)
+        public async Task<Teacher> Get(string username)
+        {
+            return await _teachers.Where(t => t.Username == username)
+                .FirstOrDefaultAsync();
+        }
+
+        public async Task<TeacherLogin> GetCredentials(string username, string password)
         {
             var teacher = await _teachers.Where(t => t.Username == username & t.Password == password)
                 .Select(t => new TeacherLogin
