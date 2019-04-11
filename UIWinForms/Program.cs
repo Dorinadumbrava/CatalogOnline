@@ -37,7 +37,7 @@ namespace UIWinForms
                 .RegisterControlView<ITeacherDetailsView, TeacherDetails>()
                 .RegisterControlView<IClassSelectorView, ClassSelector>()
                 .RegisterService<ITeacherService, TeacherService>()
-                .RegisterServiceSingleton<IEventAgregator, EventAgregator>()
+                .RegisterServiceSingleton<IEventAggregator, EventAggregator>()
                 .RegisterInstance(new ApplicationContext());
             
 

@@ -55,11 +55,12 @@
     <Compile Include="Common\IApplicationController.cs" />
     <Compile Include="Common\IContainer.cs" />
     <Compile Include="Common\IPresenter.cs" />
-    <Compile Include="Events\EventAgregator.cs" />
-    <Compile Include="Events\EventInterfaces\IApplicationEvent.cs" />
-    <Compile Include="Events\EventInterfaces\IEventAgregator.cs" />
-    <Compile Include="Events\EventInterfaces\ISubscriber.cs" />
-    <Compile Include="Events\LoginSuccessMessage.cs" />
+    <Compile Include="Events\EventAggregator.cs" />
+    <Compile Include="Events\EventInterfaces\IEventAggregator.cs" />
+    <Compile Include="Events\EventInterfaces\IMessage.cs" />
+    <Compile Include="Events\EventInterfaces\ISubscription.cs" />
+    <Compile Include="Events\Messages\LoginSuccessMessage.cs" />
+    <Compile Include="Events\Subscription.cs" />
     <Compile Include="Presenters\LoginPresenter.cs" />
     <Compile Include="Presenters\MainPresenter.cs" />
     <Compile Include="Presenters\Presenters.Interfaces\IMainPresenter.cs" />

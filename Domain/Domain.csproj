@@ -155,6 +155,10 @@
     <Compile Include="Migrations\20190409115842_Renamed StudentClasses to Courses.designer.cs">
       <DependentUpon>20190409115842_Renamed StudentClasses to Courses.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\20190411123111_AddedTeacherPwAndUsr.cs" />
+    <Compile Include="Migrations\20190411123111_AddedTeacherPwAndUsr.designer.cs">
+      <DependentUpon>20190411123111_AddedTeacherPwAndUsr.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\CatalogContextModelSnapshot.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\Repositories.Interfaces\ITeacherRepository.cs" />

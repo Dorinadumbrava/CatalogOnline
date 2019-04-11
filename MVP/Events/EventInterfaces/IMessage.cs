@@ -6,8 +6,5 @@ using System.Threading.Tasks;
 
 namespace MVP.Events.EventInterfaces
 {
-    public interface ISubscriber<TEventType>
-    {
-        void OnEventHandler(TEventType e);
-    }
+    public interface IMessage { }
 }

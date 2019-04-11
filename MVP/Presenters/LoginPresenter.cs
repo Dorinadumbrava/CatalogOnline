@@ -1,6 +1,7 @@
 ﻿using MVP.Common;
 using MVP.Events;
 using MVP.Events.EventInterfaces;
+using MVP.Events.Messages;
 using MVP.Services.Services.Interfaces;
 using MVP.Views.Views.Interfaces;
 using System;
@@ -16,18 +17,16 @@ namespace MVP.Presenters.Presenters.Interfaces
         private readonly ILoginView _view;
         private readonly ILoginService _service;
         private readonly IApplicationController controller;
-
-        //private readonly IEventAgregator _eventAgregator;
+        private readonly IEventAggregator _eventAgregator;
 
         public LoginPresenter(ILoginView view, ILoginService service,
-            IApplicationController controller
-            //, IEventAgregator eventAgregator
+            IApplicationController controller, IEventAggregator eventAgregator
             )
         {
             _view = view;
             _service = service;
             this.controller = controller;
-            //_eventAgregator = eventAgregator;
+            _eventAgregator = eventAgregator;
             _view.Login +=  () => Login(_view.Username, _view.Password);
         }
 
@@ -45,8 +44,9 @@ namespace MVP.Presenters.Presenters.Interfaces
 
             if (await _service.Login(username, password))
             {
-                EventAgregator.Instance.Publish(new LoginSuccessMessage(username));
                 controller.Run<MainPresenter>();
+                _eventAgregator.Publish(new LoginSuccessMessage { Username = username });
+                
                 
             }
             else
