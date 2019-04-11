@@ -36,8 +36,8 @@ namespace UIWinForms
                 .RegisterView<IMainView, MainForm>()
                 .RegisterControlView<ITeacherDetailsView, TeacherDetails>()
                 .RegisterControlView<IClassSelectorView, ClassSelector>()
-                .RegisterService<IStupidTeacherService, StupidTeacherService>()
-                .RegisterService<IEventAgregator, EventAgregator>()
+                .RegisterService<ITeacherService, TeacherService>()
+                .RegisterServiceSingleton<IEventAgregator, EventAgregator>()
                 .RegisterInstance(new ApplicationContext());
             
 

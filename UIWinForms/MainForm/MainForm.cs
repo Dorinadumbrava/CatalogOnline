@@ -7,19 +7,17 @@ namespace UIWinForms
     {
         private readonly ITeacherDetailsView teacherDetails;
         private readonly IClassSelectorView ClassSelector;
-        public MainForm(ITeacherDetailsView teacherDetails, IClassSelectorView ClassSelector)
+        private readonly ApplicationContext _context;
+
+        public MainForm(ITeacherDetailsView teacherDetails, IClassSelectorView ClassSelector, ApplicationContext context)
         {
             InitializeComponent();
             this.teacherDetails = teacherDetails;
             this.ClassSelector = ClassSelector;
+            _context = context;
             teacherDetails.Show();
             ClassSelector.Show();
-            //ShowTeacherDetails();
-            //ShowClassSelector();
-
         }
-
-
 
         public void ShowTeacherDetails()
         {
@@ -30,5 +28,6 @@ namespace UIWinForms
         {
             ClassSelector.Show();
         }
+        
     }
 }

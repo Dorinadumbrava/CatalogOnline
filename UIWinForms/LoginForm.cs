@@ -49,7 +49,7 @@ namespace UIWinForms
 
         public void OpenMainForm()
         {
-            MainForm mf = new MainForm(_teacherDetailsView, _classSelector);
+            MainForm mf = new MainForm(_teacherDetailsView, _classSelector, _context);
             mf.Show();
         }
     }

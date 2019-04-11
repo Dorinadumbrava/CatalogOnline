@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MVP.ViewModel
+namespace Domain.DTO
 {
     public class TeacherDetailsModel
     {

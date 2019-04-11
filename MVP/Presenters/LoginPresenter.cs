@@ -45,7 +45,7 @@ namespace MVP.Presenters.Presenters.Interfaces
 
             if (await _service.Login(username, password))
             {
-                EventAgregator.Instance.Publish(new LoginSuccessMessage("username"));
+                EventAgregator.Instance.Publish(new LoginSuccessMessage(username));
                 controller.Run<MainPresenter>();
                 
             }

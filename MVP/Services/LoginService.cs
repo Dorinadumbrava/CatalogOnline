@@ -18,7 +18,7 @@ namespace MVP.Services
         }
         public async Task<bool> Login(string username, string password)
         {
-            var teacherCredentials = await _teacherRepository.Get(username, password);
+            var teacherCredentials = await _teacherRepository.GetCredentials(username, password);
             if (teacherCredentials == null)
             {
                 return false;
