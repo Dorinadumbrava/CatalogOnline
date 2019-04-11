@@ -73,14 +73,13 @@ namespace UIWinForms
             // lblError
             // 
             this.lblError.AutoSize = true;
+            this.lblError.FontSize = MetroFramework.MetroLabelSize.Tall;
             this.lblError.Location = new System.Drawing.Point(149, 29);
             this.lblError.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblError.Name = "lblError";
             this.lblError.Size = new System.Drawing.Size(0, 0);
             this.lblError.TabIndex = 3;
             this.lblError.UseStyleColors = true;
-            this.lblError.FontSize = MetroFramework.MetroLabelSize.Tall;
-            
             // 
             // lblUsername
             // 
@@ -111,7 +110,6 @@ namespace UIWinForms
             this.lblPassword.Text = "Password";
             this.lblPassword.Theme = MetroFramework.MetroThemeStyle.Light;
             this.lblPassword.UseStyleColors = true;
-            
             // 
             // LoginForm
             // 

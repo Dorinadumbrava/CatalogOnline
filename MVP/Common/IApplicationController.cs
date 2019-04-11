@@ -1,4 +1,5 @@
 ﻿using MVP.Presenters.Presenters.Interfaces;
+using MVP.Views.ControlInterfaces;
 using MVP.Views.Views.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -13,6 +14,10 @@ namespace MVP.Common
         IApplicationController RegisterView<TView, TImplementation>()
             where TImplementation : class, TView
             where TView : IView;
+
+        IApplicationController RegisterControlView<TView, TImplementation>()
+            where TImplementation : class, TView
+            where TView : IControlView;
 
         IApplicationController RegisterInstance<TArgument>(TArgument instance);
 

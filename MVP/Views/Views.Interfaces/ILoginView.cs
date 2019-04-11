@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MVP.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,7 +11,10 @@ namespace MVP.Views.Views.Interfaces
     {
         string Username { get; }
         string Password { get; }
+
         event Action Login;
         void ShowError(string errorMessage);
+
+        void OpenMainForm();
     }
 }

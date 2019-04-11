@@ -1,4 +1,6 @@
-﻿using MVP.Presenters.Presenters.Interfaces;
+﻿using LightInject;
+using MVP.Presenters.Presenters.Interfaces;
+using MVP.Views.ControlInterfaces;
 using MVP.Views.Views.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -21,6 +23,14 @@ namespace MVP.Common
         public IApplicationController RegisterView<TView, TImplementation>()
             where TImplementation : class, TView
             where TView : IView
+        {
+            _container.Register<TView, TImplementation>();
+            return this;
+        }
+
+        public IApplicationController RegisterControlView<TView, TImplementation>()
+            where TImplementation : class, TView
+            where TView : IControlView
         {
             _container.Register<TView, TImplementation>();
             return this;
