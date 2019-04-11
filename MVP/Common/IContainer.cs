@@ -13,5 +13,6 @@ namespace MVP.Common
         void RegisterInstance<T>(T instance);
         TService Resolve<TService>();
         bool IsRegistered<TService>();
+        void RegisterSingleton<TService, TImplementation>() where TImplementation : TService;
     }
 }

@@ -11,6 +11,9 @@ namespace MVP.Common
 {
     public interface IApplicationController
     {
+        IApplicationController RegisterServiceSingleton<TModel, TImplementation>()
+            where TImplementation : class, TModel;
+
         IApplicationController RegisterView<TView, TImplementation>()
             where TImplementation : class, TView
             where TView : IView;

@@ -7,6 +7,14 @@ namespace UIWinForms
     {
         private readonly ServiceContainer _container = new ServiceContainer();
 
+        public void RegisterSingleton <TService, TImplementation>() where TImplementation : TService
+        {
+            using (_container)
+            {
+                _container.Register<TService, TImplementation>(new PerContainerLifetime());
+            }
+        }   
+
         public void Register<TService, TImplementation>() where TImplementation : TService
         {
             _container.Register<TService, TImplementation>();
