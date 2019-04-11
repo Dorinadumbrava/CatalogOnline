@@ -1,4 +1,7 @@
-﻿using MVP.Services.Services.Interfaces;
+﻿using MVP.Common;
+using MVP.Events;
+using MVP.Events.EventInterfaces;
+using MVP.Services.Services.Interfaces;
 using MVP.Views.Views.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -12,12 +15,19 @@ namespace MVP.Presenters.Presenters.Interfaces
     {
         private readonly ILoginView _view;
         private readonly ILoginService _service;
+        private readonly IApplicationController controller;
 
-        public LoginPresenter(ILoginView view, ILoginService service)
+        //private readonly IEventAgregator _eventAgregator;
+
+        public LoginPresenter(ILoginView view, ILoginService service,
+            IApplicationController controller
+            //, IEventAgregator eventAgregator
+            )
         {
             _view = view;
             _service = service;
-
+            this.controller = controller;
+            //_eventAgregator = eventAgregator;
             _view.Login += () => Login(_view.Username, _view.Password);
         }
 
@@ -33,13 +43,15 @@ namespace MVP.Presenters.Presenters.Interfaces
             if (password == null)
                 throw new ArgumentException("password", nameof(password));
 
-            if (!_service.Login(username, password))
+            if (_service.Login(username, password))
             {
-                _view.ShowError("Invalid username or password");
+                EventAgregator.Instance.Publish(new LoginSuccessMessage("username"));
+                controller.Run<MainPresenter>();
+                
             }
             else
             {
-                //Net view after Login
+                _view.ShowError("Invalid username or password");
             }
         }
     }

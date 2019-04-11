@@ -1,4 +1,8 @@
-﻿using MVP.Common;
+﻿using LightInject;
+using MVP.Common;
+using MVP.Events;
+using MVP.Events.EventInterfaces;
+using MVP.Presenters;
 using MVP.Presenters.Presenters.Interfaces;
 using MVP.Services;
 using MVP.Services.Services.Interfaces;
@@ -25,7 +29,13 @@ namespace UIWinForms
                 .RegisterView<ILoginView, LoginForm>()
              
                 .RegisterService<ILoginService, StupidLoginService>()
+                .RegisterView<IMainView, MainForm>()
+                .RegisterControlView<ITeacherDetailsView, TeacherDetails>()
+                .RegisterControlView<IClassSelectorView, ClassSelector>()
+                .RegisterService<IStupidTeacherService, StupidTeacherService>()
+                .RegisterService<IEventAgregator, EventAgregator>()
                 .RegisterInstance(new ApplicationContext());
+            
 
             controller.Run<LoginPresenter>();
         }

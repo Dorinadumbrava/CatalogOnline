@@ -15,9 +15,14 @@ namespace UIWinForms
     public partial class LoginForm : MetroFramework.Forms.MetroForm, ILoginView
     {
         private readonly ApplicationContext _context;
-        public LoginForm(ApplicationContext context)
+        private readonly IClassSelectorView _classSelector;
+        private readonly ITeacherDetailsView _teacherDetailsView;
+
+        public LoginForm(ApplicationContext context, IClassSelectorView classSelector, ITeacherDetailsView teacherDetailsView)
         {
             _context = context;
+            _classSelector = classSelector;
+            _teacherDetailsView = teacherDetailsView;
             InitializeComponent();
 
             btnLogin.Click += (sender, args) => Invoke(Login);
@@ -42,14 +47,10 @@ namespace UIWinForms
             if (action != null) action();
         }
 
-        private void metroLabel2_Click(object sender, EventArgs e)
+        public void OpenMainForm()
         {
-
-        }
-
-        private void lblUsername_Click(object sender, EventArgs e)
-        {
-
+            MainForm mf = new MainForm(_teacherDetailsView, _classSelector);
+            mf.Show();
         }
     }
 }
