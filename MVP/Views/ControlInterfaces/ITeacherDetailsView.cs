@@ -8,6 +8,8 @@ namespace MVP.Views.ControlInterfaces
 {
     public interface ITeacherDetailsView: IControlView
     {
-       string TeacherName { get; set; }
+        string TeacherName { get; set; }
+        string TeacherSurname { get; set; }
+        string TeacherGrade { get; set; }
     }
 }

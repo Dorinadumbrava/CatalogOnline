@@ -23,7 +23,7 @@ namespace MVP.Presenters
         private readonly ITeacherService teacherService;
         private readonly IEventAggregator _eventAggregator;
         private readonly ITeacherDetailsView teacherDetailsView;
-        private string teacherUsername;
+        //private string teacherUsername { get; set; }
 
         public MainPresenter(IMainView mainView, IApplicationController controller, 
             ITeacherService teacherService, IEventAggregator eventAggregator) 
@@ -32,25 +32,29 @@ namespace MVP.Presenters
             this.teacherService = teacherService;
             _eventAggregator = eventAggregator;
             _eventAggregator.Subscribe(this);
-            SetTeacherName();
             Run();
+            
         }
         public async Task HandleAsync(LoginSuccessMessage message, CancellationToken cancellationToken)
         {
-            teacherUsername = message.Username;
-            var teacher = await teacherService.GetTeacherDetails(teacherUsername);
+            var teacherUsername = message.Username;
+            SetTeacherName(teacherUsername);
+
         }
 
         public IApplicationController Controller { get; }
 
         public void Run()
         {
-            _mainView.Show();
+            _mainView.Open();
         }
 
-        void SetTeacherName()
+        public async Task SetTeacherName(string username)
         {
-            _mainView.TeacherName = teacherUsername;
+            var teacher = await teacherService.GetTeacherDetails(username);
+            _mainView.TeacherName = teacher.FirstName;
+            _mainView.TeacherSurname = teacher.Surname;
+            _mainView.TeacherGrade = teacher.Degree;
         }
 
     }

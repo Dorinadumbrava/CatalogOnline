@@ -9,5 +9,9 @@ namespace MVP.Views.Views.Interfaces
     public interface IMainView : IView
     {
         string TeacherName { get; set; }
+        string TeacherSurname { get; set; }
+        string TeacherGrade { get; set; }
+
+        void Open();
     }
 }

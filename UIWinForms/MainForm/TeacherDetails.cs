@@ -12,5 +12,7 @@ namespace UIWinForms.MainForm
         }
 
         public string TeacherName { get { return label1.Text; } set { label1.Text = value; } }
+        public string TeacherSurname { get { return label2.Text; } set { label2.Text = value; } }
+        public string TeacherGrade { get { return label3.Text; } set { label3.Text = value; } }
     }
 }

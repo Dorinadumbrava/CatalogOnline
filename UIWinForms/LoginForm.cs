@@ -1,4 +1,5 @@
-﻿using MVP.ViewModel;
+﻿using MVP.Events;
+using MVP.ViewModel;
 using MVP.Views.Views.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -7,8 +8,10 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using UIWinForms.MainForm;
 
 namespace UIWinForms
 {
@@ -18,6 +21,8 @@ namespace UIWinForms
 
         public LoginForm(ApplicationContext context)
         {
+            SyncContext.SetUIContext(SynchronizationContext.Current);
+
             _context = context;
             InitializeComponent();
 
@@ -28,6 +33,10 @@ namespace UIWinForms
         {
             _context.MainForm = this;
             Application.Run(_context);
+        }
+        public new void Close()
+        {
+            _context.ExitThread();
         }
         public string Username { get { return txtUsername.Text; } }
         public string Password { get { return txtPassword.Text; } }
