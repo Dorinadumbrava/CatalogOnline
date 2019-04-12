@@ -1,66 +1,168 @@
 ﻿using MVP.Events.EventInterfaces;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace MVP.Events
 {
-    public class EventAggregator : IEventAggregator
-    {
-        private readonly IDictionary<Type, IList> _subscriptions = new Dictionary<Type, IList>();
-       
-        public void Publish<TMessage>(TMessage message) where TMessage : IMessage
+    public class EventAggregator: IEventAggregator
+    { 
+        private readonly List<Handler> _handlers = new List<Handler>();
+        public bool HandlerExistsFor(Type messageType)
         {
-            if (message == null) throw new ArgumentNullException("message");
-            Type messageType = typeof(TMessage);
-            if(_subscriptions.ContainsKey(messageType))
+            lock (_handlers)
             {
-                var subscriptionList = new List<ISubscription<TMessage>>(
-                    _subscriptions[messageType].Cast<ISubscription<TMessage>>());
-                foreach (var subscription in subscriptionList)
-                    subscription.Action(message);
+                return _handlers.Any(handler => handler.Handles(messageType) & !handler.IsDead);
             }
         }
 
-        public ISubscription<TMessage> Subscribe<TMessage>(Action<TMessage> action) where TMessage : IMessage
+        public virtual void Subscribe(object subscriber, Func<Func<Task>, Task> marshal)
         {
-            Type messageType = typeof(TMessage);
-            var subscription = new Subscription<TMessage>(this, action);
-
-            if (_subscriptions.ContainsKey(messageType))
-                _subscriptions[messageType].Add(subscription);
-            else
-                _subscriptions.Add(messageType, new
-                    List<ISubscription<TMessage>>());
-            return subscription;
-        }
-
-        public void UnSubscribe<TMessage>(ISubscription<TMessage> subscription) where TMessage : IMessage
-        {
-            Type messageType = typeof(TMessage);
-            if (_subscriptions.ContainsKey(messageType))
-                _subscriptions[messageType].Remove(subscription);
-        }
-
-        public void ClearAllSubscriptions()
-        {
-            ClearAllSubscriptions(null);
-        }
-
-        public void ClearAllSubscriptions(Type[] exceptMessage)
-        {
-            foreach (var messageSubscriptions in new Dictionary<Type, IList>(_subscriptions))
+            if (subscriber == null)
             {
-                bool canDelete = true;
-                if (exceptMessage != null)
-                    canDelete =
-                        !exceptMessage.Contains(messageSubscriptions.Key);
-                if (canDelete)
-                    _subscriptions.Remove(messageSubscriptions);
+                throw new ArgumentNullException(nameof(subscriber));
+            }
+
+            if (marshal == null)
+            {
+                throw new ArgumentNullException(nameof(marshal));
+            }
+
+            lock (_handlers)
+            {
+                if (_handlers.Any(x => x.Matches(subscriber)))
+                {
+                    return;
+                }
+
+                _handlers.Add(new Handler(subscriber, marshal));
             }
         }
+        public virtual void Unsubscribe(object subscriber)
+        {
+            if (subscriber == null)
+            {
+                throw new ArgumentNullException(nameof(subscriber));
+            }
+
+            lock (_handlers)
+            {
+                var found = _handlers.FirstOrDefault(x => x.Matches(subscriber));
+
+                if (found != null)
+                {
+                    _handlers.Remove(found);
+                }
+            }
+        }
+
+        public virtual Task PublishAsync(object message, Func<Func<Task>, Task> marshal, CancellationToken cancellationToken)
+        {
+            if (message == null)
+            {
+                throw new ArgumentNullException(nameof(message));
+            }
+
+            if (marshal == null)
+            {
+                throw new ArgumentNullException(nameof(marshal));
+            }
+
+            Handler[] toNotify;
+
+            lock (_handlers)
+            {
+                toNotify = _handlers.ToArray();
+            }
+
+            return marshal(async () =>
+            {
+                var messageType = message.GetType();
+
+                var tasks = toNotify.Select(h => h.Handle(messageType, message, CancellationToken.None));
+
+                await Task.WhenAll(tasks);
+
+                var dead = toNotify.Where(h => h.IsDead).ToList();
+
+                if (dead.Any())
+                {
+                    lock (_handlers)
+                    {
+                        foreach(var handler in _handlers)
+                        {
+                            dead.Remove(handler);
+                        }
+                    }
+                }
+            });
+        }
+
+
+        private class Handler
+        {
+            private readonly Func<Func<Task>, Task> _marshal;
+            private readonly WeakReference _reference;
+            private readonly Dictionary<Type, MethodInfo> _supportedHandlers = new Dictionary<Type, MethodInfo>();
+
+            public Handler(object handler, Func<Func<Task>, Task> marshal)
+            {
+                _marshal = marshal;
+                _reference = new WeakReference(handler);
+
+                var interfaces = handler.GetType().GetTypeInfo().ImplementedInterfaces
+                    .Where(x => x.GetTypeInfo().IsGenericType && x.GetGenericTypeDefinition() == typeof(IHandle<>));
+
+                foreach (var @interface in interfaces)
+                {
+                    var type = @interface.GetTypeInfo().GenericTypeArguments[0];
+                    var method = @interface.GetRuntimeMethod("HandleAsync", new[] { type, typeof(CancellationToken) });
+
+                    if (method != null)
+                    {
+                        _supportedHandlers[type] = method;
+                    }
+                }
+            }
+
+            public bool IsDead => _reference.Target == null;
+
+            public bool Matches(object instance)
+            {
+                return _reference.Target == instance;
+            }
+
+            public Task Handle(Type messageType, object message, CancellationToken cancellationToken)
+            {
+                var target = _reference.Target;
+
+                if (target == null)
+                {
+                    return Task.FromResult(false);
+                }
+
+                return _marshal(() =>
+                {
+                    var tasks = _supportedHandlers
+                        .Where(handler => handler.Key.GetTypeInfo().IsAssignableFrom(messageType.GetTypeInfo()))
+                        .Select(pair => pair.Value.Invoke(target, new[] { message, cancellationToken }))
+                        .Select(result => (Task)result)
+                        .ToList();
+
+                    return Task.WhenAll(tasks);
+                });
+            }
+
+            public bool Handles(Type messageType)
+            {
+                return _supportedHandlers.Any(pair => pair.Key.GetTypeInfo().IsAssignableFrom(messageType.GetTypeInfo()));
+            }
+        }
+
+
     }
 }

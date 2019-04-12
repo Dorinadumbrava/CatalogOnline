@@ -1,4 +1,4 @@
-﻿namespace UIWinForms
+﻿namespace UIWinForms.MainForm
 {
     partial class MainForm
     {
@@ -28,90 +28,70 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.splitContainer2 = new System.Windows.Forms.SplitContainer();
-            this.teacherDetails1 = new UIWinForms.TeacherDetails();
-            this.classSelector1 = new UIWinForms.ClassSelector();
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
-            this.splitContainer1.Panel1.SuspendLayout();
-            this.splitContainer1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
-            this.splitContainer2.Panel1.SuspendLayout();
-            this.splitContainer2.Panel2.SuspendLayout();
-            this.splitContainer2.SuspendLayout();
+            this.MainContainer = new System.Windows.Forms.SplitContainer();
+            this.DetailsTable = new System.Windows.Forms.TableLayoutPanel();
+            this.teacherDetails1 = new UIWinForms.MainForm.TeacherDetails();
+            ((System.ComponentModel.ISupportInitialize)(this.MainContainer)).BeginInit();
+            this.MainContainer.Panel1.SuspendLayout();
+            this.MainContainer.SuspendLayout();
+            this.DetailsTable.SuspendLayout();
             this.SuspendLayout();
             // 
-            // splitContainer1
+            // MainContainer
             // 
-            this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer1.Location = new System.Drawing.Point(20, 60);
-            this.splitContainer1.Name = "splitContainer1";
+            this.MainContainer.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.MainContainer.Location = new System.Drawing.Point(0, 0);
+            this.MainContainer.Name = "MainContainer";
             // 
-            // splitContainer1.Panel1
+            // MainContainer.Panel1
             // 
-            this.splitContainer1.Panel1.Controls.Add(this.splitContainer2);
-            this.splitContainer1.Size = new System.Drawing.Size(760, 370);
-            this.splitContainer1.SplitterDistance = 252;
-            this.splitContainer1.TabIndex = 0;
+            this.MainContainer.Panel1.Controls.Add(this.DetailsTable);
+            this.MainContainer.Size = new System.Drawing.Size(800, 450);
+            this.MainContainer.SplitterDistance = 266;
+            this.MainContainer.TabIndex = 0;
             // 
-            // splitContainer2
+            // DetailsTable
             // 
-            this.splitContainer2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer2.Location = new System.Drawing.Point(0, 0);
-            this.splitContainer2.Name = "splitContainer2";
-            this.splitContainer2.Orientation = System.Windows.Forms.Orientation.Horizontal;
-            // 
-            // splitContainer2.Panel1
-            // 
-            this.splitContainer2.Panel1.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.splitContainer2.Panel1.Controls.Add(this.teacherDetails1);
-            // 
-            // splitContainer2.Panel2
-            // 
-            this.splitContainer2.Panel2.Controls.Add(this.classSelector1);
-            this.splitContainer2.Size = new System.Drawing.Size(252, 370);
-            this.splitContainer2.SplitterDistance = 72;
-            this.splitContainer2.TabIndex = 0;
+            this.DetailsTable.ColumnCount = 1;
+            this.DetailsTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.DetailsTable.Controls.Add(this.teacherDetails1, 0, 0);
+            this.DetailsTable.Location = new System.Drawing.Point(3, 3);
+            this.DetailsTable.Name = "DetailsTable";
+            this.DetailsTable.RowCount = 2;
+            this.DetailsTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 31.31991F));
+            this.DetailsTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 68.68009F));
+            this.DetailsTable.Size = new System.Drawing.Size(267, 447);
+            this.DetailsTable.TabIndex = 0;
             // 
             // teacherDetails1
             // 
+            this.teacherDetails1.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.teacherDetails1.Location = new System.Drawing.Point(3, 3);
             this.teacherDetails1.Name = "teacherDetails1";
-            this.teacherDetails1.Size = new System.Drawing.Size(246, 66);
+            this.teacherDetails1.Size = new System.Drawing.Size(261, 133);
             this.teacherDetails1.TabIndex = 0;
-            // 
-            // classSelector1
-            // 
-            this.classSelector1.Location = new System.Drawing.Point(33, 58);
-            this.classSelector1.Name = "classSelector1";
-            this.classSelector1.Size = new System.Drawing.Size(191, 212);
-            this.classSelector1.TabIndex = 0;
-            this.classSelector1.Visible = true;
+            this.teacherDetails1.TeacherName = "hello";
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.splitContainer1);
+            this.Controls.Add(this.MainContainer);
             this.Name = "MainForm";
             this.Text = "MainForm";
-            this.splitContainer1.Panel1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
-            this.splitContainer1.ResumeLayout(false);
-            this.splitContainer2.Panel1.ResumeLayout(false);
-            this.splitContainer2.Panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
-            this.splitContainer2.ResumeLayout(false);
+            this.MainContainer.Panel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.MainContainer)).EndInit();
+            this.MainContainer.ResumeLayout(false);
+            this.DetailsTable.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.SplitContainer splitContainer1;
-        private System.Windows.Forms.SplitContainer splitContainer2;
-        private ClassSelector classSelector1;
+        private System.Windows.Forms.SplitContainer MainContainer;
+        private System.Windows.Forms.TableLayoutPanel DetailsTable;
         private TeacherDetails teacherDetails1;
     }
 }

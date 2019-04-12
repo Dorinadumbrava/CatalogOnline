@@ -1,17 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using MVP.Views.Views.Interfaces;
+﻿using System.Windows.Forms;
+using MVP.Views.ControlInterfaces;
 
-namespace UIWinForms
+namespace UIWinForms.MainForm
 {
-    public partial class TeacherDetails : MetroFramework.Controls.MetroUserControl, ITeacherDetailsView
+    public partial class TeacherDetails : UserControl, ITeacherDetailsView
     {
 
         public TeacherDetails()
@@ -19,19 +11,6 @@ namespace UIWinForms
             InitializeComponent();
         }
 
-        public void SetTeacherName (string teacherName)
-        {
-            TeacherNameLbl.Text = teacherName;
-        }
-
-        public void SetTeacherSurname(string teacherSurname)
-        {
-            teacherSurnamelbl.Text = teacherSurname;
-        }
-
-        public void SetTeacherGrade(string teacherGrade)
-        {
-            teacherGradelbl.Text = teacherGrade;
-        }
+        public string TeacherName { get { return label1.Text; } set { label1.Text = value; } }
     }
 }

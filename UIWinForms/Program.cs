@@ -1,20 +1,17 @@
 ﻿using Domain;
 using Domain.Repositories;
 using Domain.Repositories.Interfaces;
-using LightInject;
 using MVP.Common;
 using MVP.Events;
 using MVP.Events.EventInterfaces;
-using MVP.Presenters;
 using MVP.Presenters.Presenters.Interfaces;
 using MVP.Services;
 using MVP.Services.Services.Interfaces;
+using MVP.Views.ControlInterfaces;
 using MVP.Views.Views.Interfaces;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using UIWinForms.MainForm;
 
 namespace UIWinForms
 {
@@ -33,9 +30,8 @@ namespace UIWinForms
                 .RegisterService<ICatalogContext, CatalogContext>()
                 .RegisterService<ITeacherRepository, TeacherRepository>()
                 .RegisterService<ILoginService, LoginService>()
-                .RegisterView<IMainView, MainForm>()
-                .RegisterControlView<ITeacherDetailsView, TeacherDetails>()
-                .RegisterControlView<IClassSelectorView, ClassSelector>()
+                .RegisterServiceSingleton<ITeacherDetailsView, TeacherDetails>()
+                .RegisterView<IMainView, UIWinForms.MainForm.MainForm>()
                 .RegisterService<ITeacherService, TeacherService>()
                 .RegisterServiceSingleton<IEventAggregator, EventAggregator>()
                 .RegisterInstance(new ApplicationContext());

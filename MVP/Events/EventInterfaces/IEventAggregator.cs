@@ -2,19 +2,16 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace MVP.Events.EventInterfaces
 {
     public interface IEventAggregator
     {
-        void Publish<TMessage>(TMessage message) where TMessage : IMessage;
-        ISubscription<TMessage> Subscribe<TMessage>(Action<TMessage> action)
-            where TMessage : IMessage;
-        void UnSubscribe<TMessage>(ISubscription<TMessage> subscription)
-            where TMessage : IMessage;
-
-        void ClearAllSubscriptions();
-        void ClearAllSubscriptions(Type[] exceptMessage);
+        bool HandlerExistsFor(Type messageType);
+        void Subscribe(object subscriber, Func<Func<Task>, Task> marshal);
+        void Unsubscribe(object subscriber);
+        Task PublishAsync(object message, Func<Func<Task>, Task> marshal, CancellationToken cancellationToken);
     }
 }

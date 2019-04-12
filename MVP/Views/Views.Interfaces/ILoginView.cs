@@ -15,6 +15,5 @@ namespace MVP.Views.Views.Interfaces
         event Action Login;
         void ShowError(string errorMessage);
 
-        void OpenMainForm();
     }
 }

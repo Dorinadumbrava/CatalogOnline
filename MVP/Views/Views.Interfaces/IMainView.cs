@@ -8,7 +8,6 @@ namespace MVP.Views.Views.Interfaces
 {
     public interface IMainView : IView
     {
-        void ShowTeacherDetails();
-        void ShowClassSelector();
+        string TeacherName { get; set; }
     }
 }

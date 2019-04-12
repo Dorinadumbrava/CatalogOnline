@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace MVP.Events.Messages
 {
-    public class LoginSuccessMessage : IMessage
+    public class LoginSuccessMessage 
     {
         public string Username { get; set; }
     }

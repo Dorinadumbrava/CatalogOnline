@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace MVP.Presenters.Presenters.Interfaces
@@ -45,7 +46,7 @@ namespace MVP.Presenters.Presenters.Interfaces
             if (await _service.Login(username, password))
             {
                 controller.Run<MainPresenter>();
-                _eventAgregator.Publish(new LoginSuccessMessage { Username = username });
+                await _eventAgregator.Publish(new LoginSuccessMessage { Username = username });
                 
                 
             }
