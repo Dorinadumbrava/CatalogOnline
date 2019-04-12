@@ -135,7 +135,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CatalogContext.cs" />
-    <Compile Include="Class1.cs" />
     <Compile Include="DTO\TeacherLogin.cs" />
     <Compile Include="Entities\CourseTeacher.cs" />
     <Compile Include="Entities\Discipline.cs" />

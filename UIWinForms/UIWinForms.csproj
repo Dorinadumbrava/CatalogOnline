@@ -143,12 +143,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MainForm\ClassSelector.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="MainForm\ClassSelector.Designer.cs">
-      <DependentUpon>ClassSelector.cs</DependentUpon>
-    </Compile>
     <Compile Include="LightInjectAdapter.cs" />
     <Compile Include="LoginForm.cs">
       <SubType>Form</SubType>
@@ -162,22 +156,22 @@
     <Compile Include="MainForm\MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Program.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="MainForm\TeacherDetails.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="MainForm\TeacherDetails.Designer.cs">
       <DependentUpon>TeacherDetails.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="MainForm\ClassSelector.resx">
-      <DependentUpon>ClassSelector.cs</DependentUpon>
-    </EmbeddedResource>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainForm\TeacherDetails.resx">
+      <DependentUpon>TeacherDetails.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -188,9 +182,6 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="MainForm\TeacherDetails.resx">
-      <DependentUpon>TeacherDetails.cs</DependentUpon>
-    </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

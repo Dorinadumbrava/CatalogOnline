@@ -56,16 +56,14 @@
     <Compile Include="Common\IContainer.cs" />
     <Compile Include="Common\IPresenter.cs" />
     <Compile Include="Events\EventAggregator.cs" />
+    <Compile Include="Events\EventAggregatorExtensions.cs" />
     <Compile Include="Events\EventInterfaces\IEventAggregator.cs" />
-    <Compile Include="Events\EventInterfaces\IMessage.cs" />
-    <Compile Include="Events\EventInterfaces\ISubscription.cs" />
+    <Compile Include="Events\EventInterfaces\IHandle.cs" />
     <Compile Include="Events\Messages\LoginSuccessMessage.cs" />
-    <Compile Include="Events\Subscription.cs" />
     <Compile Include="Presenters\LoginPresenter.cs" />
     <Compile Include="Presenters\MainPresenter.cs" />
     <Compile Include="Presenters\Presenters.Interfaces\IMainPresenter.cs" />
     <Compile Include="Presenters\Presenters.Interfaces\IPresenter.cs" />
-    <Compile Include="Presenters\TeacherDetailsPresenter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\Services.Interfaces\ILoginService.cs" />
     <Compile Include="Services\Services.Interfaces\ITeacherService.cs" />
@@ -74,10 +72,9 @@
     <Compile Include="ViewModel\TeacherDetailsModel.cs" />
     <Compile Include="ViewModel\UserLoginModel.cs" />
     <Compile Include="Views\ControlInterfaces\IControlView.cs" />
-    <Compile Include="Views\ControlInterfaces\IClassSelectorView.cs" />
+    <Compile Include="Views\ControlInterfaces\ITeacherDetailsView.cs" />
     <Compile Include="Views\Views.Interfaces\ILoginView.cs" />
     <Compile Include="Views\Views.Interfaces\IMainView.cs" />
-    <Compile Include="Views\ControlInterfaces\ITeacherDetailsView.cs" />
     <Compile Include="Views\Views.Interfaces\IView.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -89,5 +86,6 @@
       <Name>Domain</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -1,33 +1,26 @@
-﻿using MVP.Views.Views.Interfaces;
+﻿using MVP.Views.ControlInterfaces;
+using MVP.Views.Views.Interfaces;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace UIWinForms
+namespace UIWinForms.MainForm
 {
-    public partial class MainForm : MetroFramework.Forms.MetroForm, IMainView
+    public partial class MainForm : Form, IMainView
     {
-        private readonly ITeacherDetailsView teacherDetails;
-        private readonly IClassSelectorView ClassSelector;
-        private readonly ApplicationContext _context;
 
-        public MainForm(ITeacherDetailsView teacherDetails, IClassSelectorView ClassSelector, ApplicationContext context)
+        public MainForm()
         {
             InitializeComponent();
-            this.teacherDetails = teacherDetails;
-            this.ClassSelector = ClassSelector;
-            _context = context;
-            teacherDetails.Show();
-            ClassSelector.Show();
         }
 
-        public void ShowTeacherDetails()
-        {
-            teacherDetails.Show();
-        }
+        public string TeacherName { get { return teacherDetails1.TeacherName; } set { teacherDetails1.TeacherName = value; } }
 
-        public void ShowClassSelector()
-        {
-            ClassSelector.Show();
-        }
-        
     }
 }
