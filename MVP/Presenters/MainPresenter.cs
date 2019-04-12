@@ -21,7 +21,7 @@ namespace MVP.Presenters
     {
         private IMainView _mainView;
         private readonly ITeacherService teacherService;
-        private readonly IEventAggregator eventAggregator;
+        private readonly IEventAggregator _eventAggregator;
         private readonly ITeacherDetailsView teacherDetailsView;
         private string teacherUsername;
 
@@ -30,11 +30,8 @@ namespace MVP.Presenters
         {
             _mainView = mainView;
             this.teacherService = teacherService;
-            this.eventAggregator = eventAggregator;
-            var message = new LoginSuccessMessage();
-            //Action<LoginSuccessMessage> loginSuccessMessage = message => { _ = HandleAsync(message, CancellationToken.None); };
-            //this.eventAggregator.SubscribeOnPublishedThread(loginSuccessMessage);
-            this.eventAggregator.Subscribe(message, f => (HandleAsync(message, CancellationToken.None)));
+            _eventAggregator = eventAggregator;
+            _eventAggregator.Subscribe(this);
             SetTeacherName();
             Run();
         }
