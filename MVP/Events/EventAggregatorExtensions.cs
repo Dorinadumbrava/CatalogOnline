@@ -8,6 +8,16 @@ using System.Threading.Tasks;
 
 namespace MVP.Events
 {
+    public class SyncContext
+    {
+        public static SynchronizationContext UI { get; private set; }
+
+        public static void SetUIContext(SynchronizationContext context)
+        {
+            UI = context;
+        }
+    }
+
     public static class EventAggregatorExtensions
     {
         public static void SubscribeOnPublishedThread(this IEventAggregator eventAggregator, object subscriber)
@@ -24,6 +34,12 @@ namespace MVP.Events
         public static void SubscribeOnBackgroundThread(this IEventAggregator eventAggregator, object subscriber)
         {
             eventAggregator.Subscribe(subscriber, f => Task.Factory.StartNew(f, default, TaskCreationOptions.None, TaskScheduler.Default));
+        }
+
+        public static void PublishToUI(this IEventAggregator eventAggregator, object message)
+        {
+            var context = SyncContext.UI;
+            eventAggregator.PublishAsync(message, func => Task.Factory.StartNew(() => context.Post(_ => func.Invoke(), null)), default(CancellationToken));
         }
 
         public static Task PublishOnCurrentThreadAsync(this IEventAggregator eventAggregator, object message, CancellationToken cancellationToken)

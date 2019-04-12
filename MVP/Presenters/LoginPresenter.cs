@@ -34,6 +34,7 @@ namespace MVP.Presenters.Presenters.Interfaces
         public void Run()
         {
             _view.Show();
+            _view.Close();
         }
 
         private async void Login(string username, string password)
@@ -46,7 +47,8 @@ namespace MVP.Presenters.Presenters.Interfaces
             if (await _service.Login(username, password))
             {
                 controller.Run<MainPresenter>();
-                await _eventAgregator.PublishOnBackgroundThreadAsync(new LoginSuccessMessage { Username = username });
+                _eventAgregator.PublishToUI(new LoginSuccessMessage { Username = username });
+                
             }
 
             else
