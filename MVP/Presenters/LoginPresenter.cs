@@ -46,10 +46,9 @@ namespace MVP.Presenters.Presenters.Interfaces
             if (await _service.Login(username, password))
             {
                 controller.Run<MainPresenter>();
-                await _eventAgregator.Publish(new LoginSuccessMessage { Username = username });
-                
-                
+                await _eventAgregator.PublishOnBackgroundThreadAsync(new LoginSuccessMessage { Username = username });
             }
+
             else
             {
                 _view.ShowError("Invalid username or password");
